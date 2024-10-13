@@ -257,8 +257,12 @@ namespace Unity.Robotics.ROSTCPConnector
 
         internal void OnConnectionEstablished(NetworkStream stream)
         {
-            if (IsPublisher && IsPublisherLatched)
+            if (m_SubscriberCallbacks.Count > 0 && !SentSubscriberRegistration)
             {
+                m_ConnectionInternal.SendSubscriberRegistration(m_Topic, m_RosMessageName, m_SubscriberQoS, stream);
+                SentSubscriberRegistration = true;
+            }
+            if (IsPublisher && IsPublisherLatched){
                 m_MessageSender.PrepareLatchMessage();
                 m_ConnectionInternal.AddSenderToQueue(m_MessageSender);
             }
