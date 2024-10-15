@@ -31,8 +31,8 @@ namespace Unity.Robotics.ROSTCPConnector
     public enum QoSReliability
     {
         Default = 0,
-        BestEffort = 1,
-        Reliable = 2,
+        Reliable = 1,
+        BestEffort = 2,
         Unknown = 3
     }
 
